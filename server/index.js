@@ -16,18 +16,28 @@ io.on("connection", (socket) => {
   socket.emit("welcome", "Welcome to the server");
 
   // Listening for event from client
-  socket.on("message", (msg) => {
-    console.log(msg);
-    io.emit("message", $`{socket.id.substr(0, 2)} said ${msg}`);
-  });
-
-  // Listening for event from client
-  socket.on("disconnect", () => {
-    console.log("User disconnected");
+  socket.on("message", (message) => {
+    console.log(message);
+    io.emit("message", `${socket.id.substr(0, 2)} said ${message}`);
   });
 });
 
-// Listening on port 3000
-http.listen(3000, () => {
-  console.log("Listening on port 3000");
+// Listening on port 8080
+http.listen(8080, () => {
+  console.log("Listening on port 8080");
 });
+
+// Regular Websockets
+
+// const WebSocket = require('ws')
+// const server = new WebSocket.Server({ port: '8080' })
+
+// server.on('connection', socket => {
+
+//   socket.on('message', message => {
+
+//     socket.send(`Roger that! ${message}`);
+
+//   });
+
+// });
